@@ -20,12 +20,18 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.frameworks      = "MobileCoreServices", "SystemConfiguration", "AVFoundation", "CoreVideo", "Accelerate", "CoreMedia", "AudioToolbox", "CoreLocation", "CoreData", "CoreGraphics", "CFNetwork", "UIKit"
   s.libraries           = "resolv", "xml2", "stdc++", "z"
-  s.xcconfig            = { 'HEADER_SEARCH_PATHS' => '/usr/include/libxml2', "FRAMEWORK_SEARCH_PATHS" => "$(PODS_ROOT)/../../Framework $(PODS_ROOT)/../External"}
-  s.prefix_header_contents = 
-  '#import <Quickblox/Quickblox.h>
-#import <CoreData/CoreData.h>
-#import <Quickblox/QBMulticastDelegate.h>
-#import <Bolts/Bolts.h>'
-  s.resource_bundle = {'QMChatCacheModel' => 'QMChatCache/QMChatCache/CoreData/QMChatServiceModel.xcdatamodeld', 'QMContactListCacheModel' => 'QMContactListCache/QMContactListCache/CoreData/QMContactListModel.xcdatamodeld', 'QMUsersCacheModel' => 'QMUsersCache/QMUsersCache/CoreData/QMUsersModel.xcdatamodeld'}
+  s.xcconfig            = { 'HEADER_SEARCH_PATHS' => '/usr/include/libxml2', 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/../Vendor/quickblox-services-ios/Frameworks"'}
+  s.prefix_header_contents =
+    '#import <Quickblox/Quickblox.h>
+     #import <CoreData/CoreData.h>
+     #import <Quickblox/QBMulticastDelegate.h>
+     #import <Bolts/Bolts.h>'
+
+  s.resource_bundle = {
+    'QMChatCacheModel' => 'QMChatCache/QMChatCache/CoreData/QMChatServiceModel.xcdatamodeld',
+    'QMContactListCacheModel' => 'QMContactListCache/QMContactListCache/CoreData/QMContactListModel.xcdatamodeld',
+    'QMUsersCacheModel' => 'QMUsersCache/QMUsersCache/CoreData/QMUsersModel.xcdatamodeld'}
+
   s.dependency "Bolts",  '>= 1.5.0'
+  s.dependency "QuickBlox", ">= 2.6.5"
 end
